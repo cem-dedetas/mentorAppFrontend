@@ -1,13 +1,18 @@
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Fader from '../components/Fader';
-import Navbar from '../components/Navbar';
-import MentorSlider from '../components/MentorSlider';
-import MentorSliderItem from '../components/MentorSliderItem';
-import Image from 'next/image';
+import Button from '../../components/Button';
+import styles from '../../styles/pages/Browse.module.css';
+import bgImage from '../../public/img3.jpg';
 
-const Home: NextPage = () => {
+import MentorSlider from '../../components/MentorSlider';
+import MentorSliderItem from '../../components/MentorSliderItem';
+import Navbar from '../../components/Navbar';
+import { useEffect, useState } from 'react';
+import Fader from '../../components/Fader';
+
+const Browse : NextPage = () => {
 
    const { t } = useTranslation();
 
@@ -76,46 +81,67 @@ const Home: NextPage = () => {
          <MentorSliderItem src="/image22.png"/>
       ]
    }
-
+   
    return (
-      <div style={{height:'100%', maxWidth:'100vw', overflowX:'hidden', backgroundColor:'#101511'}}>
-         <Navbar/>
-         <Image style={{position:'relative', aspectRatio:'16/9', top:'0', width:'100%'}} src="/img4.jpg" alt="me" layout='fill'/> 
-         <div style={{
-            position: "absolute",
-            top: "75%",
-            zIndex: "5",
-            backgroundColor:'transparent'
-         }} >
-            <div className={styles['top-most-slider']}> 
+      <div onScroll={(lol: any) => {console.log('hey',lol)}}>
 
+         <Navbar/>
+         <div className={styles['container']}>
+            <div 
+               className={styles['content']} 
+               >
+               <div className={styles['bg-img']}>
+                  <Image src="/img4.jpg" alt="me" layout='fill'/>
+               </div>
+               <div className={styles['info-box']}>
+                  <div className={styles['name']}>
+                     Neil Patrick Harris
+                  </div>
+                  <div className={styles['explanation']}>
+                     Here are the best mentors from variety of fields you can choose from ariety of fields you can choose from
+                  </div>
+                  <div className={styles['buttons']}>
+                     <Button
+                        type = "primary"
+                        label = "Choose Your Plan"
+                        onClick = {() => {console.log('clicked')}}
+                        />
+                     <Button
+                        type = "secondary"
+                        label = "More Info"
+                        onClick = {() => {console.log('clicked')}}
+                        />
+                  </div>
+               </div>
             </div>
-            <Fader fadeTo="#101511">
+            <div className = {styles['sliders']}>
+               <Fader fadeTo='#101511'>
+                  <MentorSlider
+                     title="Powerlifting Mentors"
+                     source={getPowerlifterMentors()}
+                  />
+               </Fader>
+               <MentorSlider
+                  title="Bodybuilding Mentors"
+                  source={getBodybuilderMentors()}
+                  />
+               <MentorSlider
+                  title="Diet Mentors"
+                  source={getDietMentors()}
+                  />
                <MentorSlider
                   title="Powerlifting Mentors"
                   source={getPowerlifterMentors()}
-               />
-            </Fader>
-            <MentorSlider
-               title="Bodybuilding Mentors"
-               source={getBodybuilderMentors()}
-               />
-            <MentorSlider
-               title="Diet Mentors"
-               source={getDietMentors()}
-               />
-            <MentorSlider
-               title="Powerlifting Mentors"
-               source={getPowerlifterMentors()}
-               />
-            <MentorSlider
-               title="Bodybuilding Mentors"
-               source={getBodybuilderMentors()}
-               />
-            <MentorSlider
-               title="Diet Mentors"
-               source={getDietMentors()}
-            />
+                  />
+               <MentorSlider
+                  title="Bodybuilding Mentors"
+                  source={getBodybuilderMentors()}
+                  />
+               <MentorSlider
+                  title="Diet Mentors"
+                  source={getDietMentors()}
+                  />
+            </div>
          </div>
       </div>
    )
@@ -124,10 +150,10 @@ const Home: NextPage = () => {
 export const getStaticProps = async ({ locale } : any) => {
    return {
       props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-      // Will be passed to the page component as props
-      },
-   };
+         ...(await serverSideTranslations(locale, ['common'])),
+         // Will be passed to the page component as props
+   },
+};
 }
 
-export default Home
+export default Browse

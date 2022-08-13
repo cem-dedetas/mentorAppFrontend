@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.container:hover{
+}
+
+.slider {
+    display: flex;
+    flex-grow: 1;
+    transition: transform 0.5s ease-in-out;
+}
+
+.handle {
+    border: none;
+    border-radius: 1rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, .25);
+    z-index: 10;
+    cursor: pointer;
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    line-height: 0;
+    transition: background-color 150ms ease-in-out;
+}
+
+.leftHandle {
+    visibility: hidden;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.rightHandle {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.handle:hover,
+.handle:focus {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.text {
+    transition: transform 150ms ease-in-out;
+}
+
+.handle:hover .text,
+.handle:focus .text {
+    transform: scale(1.2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 2vw;
+    margin: 0;
+}
+
+.progress-bar {
+    display: flex;
+    gap: .25rem;
+}
+
+.progress-item {
+    flex: 0 0 1.5rem;
+    min-width: 1.5rem;
+    height: 0.15rem;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.progress-item.active {
+    background-color: rgba(255, 255, 255, .9);
+}

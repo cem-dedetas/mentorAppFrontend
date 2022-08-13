@@ -1,0 +1,9 @@
+.container {
+    margin: 0 auto;
+    padding: 1em;
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+

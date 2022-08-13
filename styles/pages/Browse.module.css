@@ -1,0 +1,59 @@
+.container {
+    padding-top: -60px;
+    background-color: #101511;
+    color: white;
+    max-width: 100vw;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.content {
+    width: 100%;
+    height:100%;
+    aspect-ratio: 16/9;
+}
+
+.bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.info-box {
+    position: relative;
+    z-index: 5;
+    padding-left: 5vw;
+    top: 35%;
+    width: 70%;
+}
+
+.name {
+    font-size: 4vw;
+    width: 50%;
+}
+
+.explanation {
+    font-size: 2vw;
+    width: 40%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    flex-wrap: nowrap;
+    font-size: calc(3px + 1.5vw);
+    width: 100%;
+}
+
+.sliders {
+    position: absolute;
+    top: 75%;
+    z-index: 5;
+}
