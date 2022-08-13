@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config');
-
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   i18n,
   publicRuntimeConfig: {
@@ -13,5 +11,3 @@ const nextConfig = {
       : process.env.AUTH_URL, // production auth api
   }
 }
-
-module.exports = nextConfig
