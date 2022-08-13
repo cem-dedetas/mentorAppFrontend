@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -17,4 +19,17 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+  
+.theme-dark {
+  --dark-black : #080E09;
+  --soft-black : #101511;
+  --green : #DBFF00;
 }
