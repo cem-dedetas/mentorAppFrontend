@@ -10,21 +10,24 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.4",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "@mdi/font": "^7.0.96",
     "axios": "^0.27.2",
     "framer-motion": "6",
     "jest-environment-jsdom": "^28.1.1",
     "next": "12.1.6",
     "next-i18next": "^11.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sass": "^1.54.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
-    "@types/node": "18.0.0",
+    "@types/node": "^18.6.5",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
