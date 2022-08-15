@@ -33,5 +33,14 @@ axios.interceptors.request.use(config => {
     return config;
 });
 
+axios.interceptors.request.use(config =>{
+    const user = JSON.parse(localStorage.getItem('user') as string)
+    if(user?.token){
+        config.headers = {...config.headers,'Authorization':"Bearer " + user.token}
+    }
+    console.log(user?.token)
+    return config
+});
+
 const httpClient = new HttpClient();
 export default httpClient; 
