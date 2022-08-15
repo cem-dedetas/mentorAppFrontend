@@ -17,7 +17,7 @@ export class MentorResult {
 class MentorService {
 
     async getMentor(id: string): Promise<Mentor> {
-        const mentor = await httpClient.get<Mentor>(`./Mentor/${id}`);
+        const mentor = await httpClient.get<Mentor>(`./Mentors/${id}`);
         return mentor;
     }
 
