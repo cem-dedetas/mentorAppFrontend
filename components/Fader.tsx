@@ -39,18 +39,12 @@ const Fader = ({ children, fadeTo } : React.PropsWithChildren<FaderProps>) => {
         l = Math.round(l * 100);
         
         cssString = h + ',' + s + '%,' + l + '%';
-        
-        console.log('sadsad');
         return cssString;
     }
 
     const getFaderString = () => {
         const hslString = hexToCssHsl(fadeTo);
-        console.log(hslString);
         const hsl = `linear-gradient(180deg,hsla(${hslString},0) 0,hsla(${hslString},.15) 15%,hsla(${hslString},.35) 29%,hsla(${hslString},.58) 44%,${fadeTo} 68%,${fadeTo})`;
-        //linear-gradient(180deg,hsla(132, 14%, 7%,0) 0,hsla(132, 14%, 7%,.15) 15%,hsla(132, 14%, 7%,.35) 29%,hsla(132, 14%, 7%,.58) 44%,#101511 68%,#101511)
-
-        console.log(hsl);
         return hsl;
     }
 

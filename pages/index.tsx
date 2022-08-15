@@ -31,6 +31,7 @@ const Home: NextPage = () => {
          <MentorSliderItem src="/image33.png"/>,
          <MentorSliderItem src="/image33.png"/>,
          <MentorSliderItem src="/image33.png"/>,
+         <MentorSliderItem src="/image36.png"/>,
       ]
    }
 
@@ -87,9 +88,6 @@ const Home: NextPage = () => {
             zIndex: "5",
             backgroundColor:'transparent'
          }} >
-            <div className={styles['top-most-slider']}> 
-
-            </div>
             <Fader fadeTo="#101511">
                <MentorSlider
                   title="Powerlifting Mentors"
@@ -97,21 +95,25 @@ const Home: NextPage = () => {
                />
             </Fader>
             <MentorSlider
-               title="Bodybuilding Mentors"
+               title="Boddsasadsad Mentors"
                source={getBodybuilderMentors()}
-               />
+               bgColor="#101511"
+            />
             <MentorSlider
                title="Diet Mentors"
                source={getDietMentors()}
-               />
+               bgColor="#101511"
+            />
             <MentorSlider
                title="Powerlifting Mentors"
                source={getPowerlifterMentors()}
-               />
+               bgColor="#101511"
+            />
             <MentorSlider
                title="Bodybuilding Mentors"
                source={getBodybuilderMentors()}
-               />
+               bgColor="#101511"
+            />
             <MentorSlider
                title="Diet Mentors"
                source={getDietMentors()}
