@@ -5,8 +5,6 @@
     padding: 0px;
 }
 
-.container:hover{
-}
 
 .slider {
     display: flex;
@@ -16,7 +14,7 @@
 
 .handle {
     border: none;
-    border-radius: 1rem;
+    border-radius: 5px;
     flex-grow: 0;
     flex-shrink: 0;
     background-color: rgba(255, 255, 255, .25);
@@ -58,17 +56,22 @@
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .title {
-    font-size: 2vw;
+    margin-right: auto;
+    white-space: nowrap;
+    font-size: min(30px,2vmax);
+    font-weight: 500;
     margin: 0;
 }
 
 .progress-bar {
     display: flex;
+    margin-left: auto;
     gap: .25rem;
 }
 

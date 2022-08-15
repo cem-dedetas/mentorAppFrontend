@@ -1,10 +1,5 @@
 .container {
     aspect-ratio: 16 / 9;
-    border-radius: 1rem;
-    flex: 1 1 0px;
+    border-radius: 5px;
 }
 
-.container:hover {
-    border: 1px solid #DBFF00;
-    cursor: pointer;
-}

@@ -8,15 +8,15 @@ import styles from '../styles/components/MentorSlider.module.css';
 interface MentorSliderProps {
     title? : string;
     source : ReactNode[];
-    isFirstItem? : boolean;
+    bgColor? : string;
 }
 
-const MentorSlider = ({title, source} : MentorSliderProps) => {
+const MentorSlider = ({title, source, bgColor} : MentorSliderProps) => {
 
-    const itemSpan = useBreakpointValue({ base:3, sm:4, md:5, lg:6, xl:7, '2xl':8 });
+    const itemSpan = useBreakpointValue({ base:2, sm:3, md:4, lg:5, xl:6, '2xl':6 });
     if(!itemSpan) return <></>;
     const [ sliderPadding, setSliderPadding ] = useState('5rem');
-    const [ handleSize, setHandleSize ] = useState('2.5rem');
+    const [ handleSize, setHandleSize ] = useState('calc(5% - .5rem)');
     const [ imgGap, setImgGap ] = useState('.25rem');
     const [ sliderIndex, setSliderIndex ] = useState(0);
     const [ totalItemCount, setTotalItemCount ] = useState<number>(source.length);
@@ -53,8 +53,6 @@ const MentorSlider = ({title, source} : MentorSliderProps) => {
             );
         }
 
-        console.log(subItems);
-
         return (
             <div className={styles['progress-bar']}>
                 {subItems}
@@ -62,67 +60,43 @@ const MentorSlider = ({title, source} : MentorSliderProps) => {
         );
     }
 
-    const getSlider = () => {
-        return (<>
-            <div 
-                className={styles['header']}
-                style={{padding: `.5rem calc(${imgGap} * 2 + ${handleSize}`}}
-            >
-                <h3 className={styles['title']}>{title}</h3>
-                {getProgressBar()}
-            </div>
-            <div 
-                className={styles['container']}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}    
-            >   
-                <div 
-                    className={`${styles['handle']} ${styles['leftHandle']}`}
-                    style={{margin: `${imgGap} 0`, width: `${handleSize}`, visibility:hover ? 'visible' : 'hidden'}}
-                    onClick = {onClickLeftButton}
-                >
-                    <ChevronLeftIcon w='6vmin' h='6vmin' color='white'/>
-                </div>
-                <div 
-                    className={styles['slider']}
-                    style={{margin: `0 ${imgGap}`, transform: `translateX(calc(${sliderIndex} * -100%))` }}
-                >
-                    {source}
-                </div>
-                <div 
-                    className={`${styles['handle']} ${styles['rightHandle']}`}
-                    style={{margin: `${imgGap} 0`, width: `${handleSize}`, visibility:hover ? 'visible' : 'hidden'}}
-                    onClick = {onClickRightButton}
-                >
-                    <ChevronRightIcon w='6vmin' h='6vmin' color='white'/>
-                </div>
-            </div>
-        </>);
+    const getTransformFunction = () => {
+        const left = source.length - (itemSpan * sliderIndex);
+        if(left > itemSpan){
+            return `translateX(calc(${sliderIndex} * -100%))`;
+        }else{
+            const strings = `translateX(calc(calc(${sliderIndex - 1} * -100%) - ${left/itemSpan*100}%))`;
+            return strings;
+        }
     }
 
     return (<>
+    <div>
         <div 
             className={styles['header']}
-            style={{padding: `.5rem calc(${imgGap} * 2 + ${handleSize}`}}
+            style={{padding: `".5rem calc(${imgGap} * 2 + ${handleSize}"`, backgroundColor: !bgColor ? 'transparent' : bgColor }}
         >
-            <h3 className={styles['title']}>{title}</h3>
-            {getProgressBar()}
+            <div style={{width:'90%', display:'flex', alignItems:'center'}}>
+                <h3 className={styles['title']}>{title}</h3>
+                {getProgressBar()}
+            </div>
         </div>
         <div 
             className={styles['container']}
             onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}    
+            onMouseLeave={() => setHover(false)}
+            style={{backgroundColor: !bgColor ? 'transparent' : bgColor}}    
         >   
             <div 
                 className={`${styles['handle']} ${styles['leftHandle']}`}
-                style={{margin: `${imgGap} 0`, width: `${handleSize}`, visibility:hover ? 'visible' : 'hidden'}}
+                style={{margin: `${imgGap} 0`, width: `${handleSize}`, visibility:hover && sliderIndex > 0 ? 'visible' : 'hidden'}}
                 onClick = {onClickLeftButton}
             >
                 <ChevronLeftIcon w='6vmin' h='6vmin' color='white'/>
             </div>
             <div 
                 className={styles['slider']}
-                style={{margin: `0 ${imgGap}`, transform: `translateX(calc(${sliderIndex} * -100%))` }}
+                style={{margin: `0 ${imgGap}`, transform: getTransformFunction() }}
             >
                 {source}
             </div>
@@ -134,6 +108,7 @@ const MentorSlider = ({title, source} : MentorSliderProps) => {
                 <ChevronRightIcon w='6vmin' h='6vmin' color='white'/>
             </div>
         </div>
+    </div>
     </>);
 }
 

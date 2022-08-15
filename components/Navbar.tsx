@@ -15,7 +15,6 @@ const Navbar = () => {
       const handleScroll = (e : any) => {
          const scrollTop = e.target.documentElement.scrollTop;
          scrollTop != 0 ? setTop(true) : setTop(false);
-         console.log(top);
       };
       if (document) {
          document.addEventListener("scroll", handleScroll);
@@ -58,7 +57,6 @@ const Navbar = () => {
    }
 
    const getButton = (icon : JSX.Element, title : string, href : string) => {
-      console.log(mobile);
       return (
           <div className = {styles['button']}>
               {icon}
