@@ -1,6 +1,17 @@
 import httpClient from './http-service';
 import LoginResponse from '../dto/auth/LoginResponse';
 import RegisterResponse from '../dto/auth/RegisterReponse';
+import jwt_decode from "jwt-decode";
+
+interface User{
+    id:string,
+    email:string,
+    menteeId:string,
+    mentorId:string,
+    role:string,
+    exp:number,
+    token:string
+}
 
 class AuthService {
 
@@ -9,6 +20,17 @@ class AuthService {
             Email : email,
             Password : password
         });
+        const decodedToken = jwt_decode(response.token)
+        const user:User={
+            id: decodedToken.id,
+            email: decodedToken.email,
+            menteeId: decodedToken.menteeId,
+            mentorId: decodedToken.mentorId,
+            role: '',//TODO: FIX THIS
+            exp: decodedToken.exp,
+            token: response.token
+        }
+        localStorage.setItem('user',JSON.stringify(user))
         return response;
     }
 
