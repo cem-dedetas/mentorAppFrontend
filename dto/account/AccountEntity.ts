@@ -1,7 +1,10 @@
 import AccountTypeEnum from '../account/AccountTypeEnum';
 
-class AccountEntity {
-    constructor(Email : string, PasswordHash : string, PasswordSalt : string, MentorId : string, MenteeId : string, AccountType : AccountTypeEnum) {}
+export default class AccountEntity {
+    email : string;
+    passwordHash : string;
+    passwordSalt : string;
+    mentorId : string;
+    menteeId : string;
+    accountType : AccountTypeEnum;
 }
-
-export default AccountEntity;

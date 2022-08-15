@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  i18n,
   publicRuntimeConfig: {
     apiUrl: process.env.NODE_ENV === 'development'
       ? 'http://localhost:5127/api/' // development api
