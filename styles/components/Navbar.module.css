@@ -41,6 +41,10 @@
    column-gap: 10px;
 }
 
+.login {
+   font-size: calc(2.75px + 1.25vw);
+}
+
 .button {
    display: flex;
    color : lightgray;

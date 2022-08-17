@@ -1,4 +1,7 @@
 {
-    "loginsss" : "login"
+    "loginsss" : "login",
+    "Login":"Login",
+    "SignUp":"Sign Up",
+    "SignUpOrIn":"Sign Up/In"
 }
 
