@@ -12,7 +12,7 @@
    transition: color 0.25s ease;
    transition: background-color 0.25s ease;
    background-image: linear-gradient(to top, transparent 0%, rgba(8, 14, 9, 0.85) 100%);
-   
+
 }
 
 .left {
@@ -36,18 +36,42 @@
    width: 90%;
 }
 
-.buttons {   
+.buttons {
    display: flex;
    column-gap: 10px;
+   align-items: center;
 }
 
 .login {
    font-size: calc(2.75px + 1.25vw);
 }
 
+.text-on-dark {
+   color: #D9D9D9;
+   font-size: calc(3px + 1.25vw);
+}
+
+.modal-buttons {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   margin-bottom: 10px;
+}
+
+.input{
+   margin-bottom: 10px;
+}
+
+.bottom {
+   padding-top: 5%;
+   padding-bottom: 5px;
+   top: 50%;
+}
+
 .button {
    display: flex;
-   color : lightgray;
+   color: lightgray;
    transition: color 0.25s;
    display: flex;
    align-items: center;

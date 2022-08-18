@@ -2,5 +2,7 @@
     "loginsss" : "login",
     "Login":"Login",
     "SignUp":"Sign Up",
-    "SignUpOrIn":"Sign Up/In"
+    "SignUpOrIn":"Sign Up/In",
+    "Email":"Email",
+    "Password":"Password"
 }

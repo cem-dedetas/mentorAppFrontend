@@ -1,5 +1,9 @@
+
+
 class LoginResponse {
-    constructor(Message : string, Token : string) {}
+    Message: string;
+    Token: string;
+    success: boolean
 }
 
 export default LoginResponse;
