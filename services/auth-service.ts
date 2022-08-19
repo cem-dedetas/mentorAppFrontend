@@ -32,7 +32,7 @@ class AuthService {
                 exp: decodedToken.exp,
                 token: response.token
             }
-            localStorage.setItem('user',JSON.stringify(user))
+            localStorage.setItem('user',JSON.stringify(user));
             return true;
         }
         return false;

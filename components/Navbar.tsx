@@ -7,6 +7,7 @@ import { Avatar } from '@chakra-ui/react'
 import Button from './Button';
 import { useTranslation } from "next-i18next";
 import authService from '../services/auth-service';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
 
@@ -16,8 +17,9 @@ const Navbar = () => {
    const [top, setTop] = useState(false);
    const [loggedIn, setLogin] = useState(false);
    const { isOpen, onOpen, onClose } = useDisclosure();
-   const [emailInput, setEmailInput] = useState('')
-   const [passwordInput, setPWInput] = useState('')
+   const [emailInput, setEmailInput] = useState('');
+   const [passwordInput, setPWInput] = useState('');
+   const router = useRouter();
 
    useEffect(() => {
       // Define a function that is called when the scroll event fires
@@ -74,12 +76,16 @@ const Navbar = () => {
       );
    }
 
+   const handleClick = (eventRef: any, name: any) => {
+      console.log('toogle event ref', eventRef);
+  }
+
    const getProfileDropdownItems = () => {
       const profileDropdownItems = [
          { icon: <LogoutIcon size='24' color='white' />, title: 'Something', href: '#' },
          { icon: <HelpIcon size='24' color='white' />, title: 'Another', href: '#' },
          { icon: <HelpIcon size='24' color='white' />, title: 'Help', href: '#' },
-         { icon: <LogoutIcon size='24' color='white' />, title: 'Log out', href: '#', hasBrUp: true, brColor: 'white' }
+         { icon: <LogoutIcon size='24' color='white' />, title: 'Log out1', href: '#', hasBrUp: true, brColor: 'white',onClick:()=>{onLogout()}}
       ]
       return profileDropdownItems;
    }
@@ -211,8 +217,17 @@ const Navbar = () => {
       console.log(response);
       if(response){
          setLogin(true);
+         router.push('/browse');
       }
    }
+    
+   const onLogout = () => {
+      localStorage.removeItem('user');
+      setLogin(false);
+      router.push('/dashboard');
+      console.log("logged out");
+   }
+   
    return (
       <><div className={`${styles['container']} ${top && styles['top']}`}>
          <div className={styles['content']}>
