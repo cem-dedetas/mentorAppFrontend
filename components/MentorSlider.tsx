@@ -6,24 +6,26 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import styles from '../styles/components/MentorSlider.module.css';
 
 interface MentorSliderProps {
+    key : string;
     title? : string;
-    source : ReactNode[];
+    source : JSX.Element[];
     bgColor? : string;
 }
 
-const MentorSlider = ({title, source, bgColor} : MentorSliderProps) => {
+const MentorSlider = ({key, title, source, bgColor} : MentorSliderProps) => {
 
-    const itemSpan = useBreakpointValue({ base:2, sm:3, md:4, lg:5, xl:6, '2xl':6 });
-    if(!itemSpan) return <></>;
     const [ sliderPadding, setSliderPadding ] = useState('5rem');
     const [ handleSize, setHandleSize ] = useState('calc(5% - .5rem)');
     const [ imgGap, setImgGap ] = useState('.25rem');
     const [ sliderIndex, setSliderIndex ] = useState(0);
     const [ totalItemCount, setTotalItemCount ] = useState<number>(source.length);
-    const [ progressBarItemCount, setProgressBarItemCount ] = useState(Math.ceil(totalItemCount / itemSpan));
     const [ hover, setHover ] = useState<boolean>(false);
-
+    const itemSpan : number = useBreakpointValue({base:2, sm:3, md:4, lg:5, xl:6, '2xl':6 }) as number;
+    const [ progressBarItemCount, setProgressBarItemCount ] = useState<number>(1);
     useEffect(() => {
+        if(!itemSpan){
+            return;
+        }
         setProgressBarItemCount(Math.ceil(totalItemCount / itemSpan));
     }, [totalItemCount, itemSpan])
 
@@ -43,13 +45,14 @@ const MentorSlider = ({title, source, bgColor} : MentorSliderProps) => {
         }
     }
 
-    const getProgressBar = () : ReactNode => {
-        const subItems : ReactNode[] = [];
+    const getProgressBar = () : JSX.Element => {
+        const subItems : JSX.Element[] = [];
         for(var i = 0; i < progressBarItemCount; i++){
             subItems.push(
                 <div 
+                    key={`progressBar${i}`}
                     className={`${styles['progress-item']} ${i === sliderIndex ? styles['active'] : ' '}`}
-                    style={{visibility:hover ? 'visible' : 'hidden'}}/>
+                    style={{visibility:hover ? 'visible' : 'hidden'}}></div>
             );
         }
 
@@ -70,8 +73,8 @@ const MentorSlider = ({title, source, bgColor} : MentorSliderProps) => {
         }
     }
 
-    return (<>
-    <div>
+    return (
+    <div key={key}>
         <div 
             className={styles['header']}
             style={{padding: `".5rem calc(${imgGap} * 2 + ${handleSize}"`, backgroundColor: !bgColor ? 'transparent' : bgColor }}
@@ -108,8 +111,7 @@ const MentorSlider = ({title, source, bgColor} : MentorSliderProps) => {
                 <ChevronRightIcon w='6vmin' h='6vmin' color='white'/>
             </div>
         </div>
-    </div>
-    </>);
+    </div>);
 }
 
 export default MentorSlider;

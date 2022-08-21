@@ -30,12 +30,20 @@ const Dropdown = ({title, items, avatar, direction} : DropdownProps) => {
 
     const getDropdownItems = () => {
         const dropdownItems : JSX.Element[] = [];
-        items.forEach((item) => {
+        items.forEach((item, idx) => {
             if(item.hasBrUp){
-                dropdownItems.push(<Br color={!item.brColor ? 'white' : item.brColor}/>);
+                dropdownItems.push(
+                    <Br
+                        key={`dropdownItemBr${idx}`}
+                        color={!item.brColor ? 'white' : item.brColor}
+                    />
+                );
             }
             dropdownItems.push(
-                <div className = {styles['dropdown-button']}>
+                <div    
+                    key={`dropdownItem${idx}`} 
+                    className = {styles['dropdown-button']}
+                >
                     {item.icon}
                     <span>{item.title}</span>
                 </div>
