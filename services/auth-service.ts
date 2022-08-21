@@ -15,23 +15,28 @@ interface User{
 
 class AuthService {
 
-    async login(email : string, password : string): Promise<LoginResponse> {
+    async login(email : string, password : string){
         const response = await httpClient.post<LoginResponse>(`./Auth/Login`, {
             Email : email,
             Password : password
         });
-        const decodedToken = jwt_decode(response.token)
-        const user:User={
-            id: decodedToken.id,
-            email: decodedToken.email,
-            menteeId: decodedToken.menteeId,
-            mentorId: decodedToken.mentorId,
-            role: '',//TODO: FIX THIS
-            exp: decodedToken.exp,
-            token: response.token
+        console.log(response)
+        if(response.success){
+            const decodedToken = jwt_decode(response.token)
+            const user:User={
+                id: decodedToken.id,
+                email: decodedToken.email,
+                menteeId: decodedToken.menteeId,
+                mentorId: decodedToken.mentorId,
+                role: '',//TODO: FIX THIS
+                exp: decodedToken.exp,
+                token: response.token
+            }
+            localStorage.setItem('user',JSON.stringify(user));
+            return true;
         }
-        localStorage.setItem('user',JSON.stringify(user))
-        return response;
+        return false;
+        
     }
 
     async register(email : string, password : string): Promise<RegisterResponse> {

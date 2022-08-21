@@ -9,6 +9,7 @@ interface DropdownItem {
     href : string;
     hasBrUp? : boolean;
     brColor? : string;
+    onClick? : any;
 }
 
 interface DropdownProps {
@@ -40,10 +41,7 @@ const Dropdown = ({title, items, avatar, direction} : DropdownProps) => {
                 );
             }
             dropdownItems.push(
-                <div    
-                    key={`dropdownItem${idx}`} 
-                    className = {styles['dropdown-button']}
-                >
+                <div className = {styles['dropdown-button']} onClick = {()=>item.onClick}>
                     {item.icon}
                     <span>{item.title}</span>
                 </div>
