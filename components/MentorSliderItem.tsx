@@ -1,100 +1,44 @@
-import { SyntheticEvent, useCallback, useRef, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useBreakpointValue } from "@chakra-ui/react";
 
 import styles from '../styles/components/MentorSliderItem.module.css';
-import React from 'react';
 
 interface MentorSliderItemProps {
     key : string;
     src : string;
-    callback : any;
     index : number;
+    onClick : any;
 }
 
-interface MentorData {
-    src : string;
-}
+const MentorSliderItem = ({ key, src, index, onClick } : MentorSliderItemProps) => {
 
-export interface HoverBox {
-    x : number,
-    y : number,
-    width : number,
-    height : number,
-    mentorData : MentorData,
-    position : 'left' | 'center' | 'right',
-    isOpen : boolean,
-}
-
-const MentorSliderItem = ({ key, src, callback, index } : MentorSliderItemProps) => {
-
-    const myRef = useRef<any>();
-    const [ imgGap, setImgGap ] = useState('.25rem');
-    const [ isHover, setIsHover ] = useState<boolean>(false);
-    const [ hoverBox, setHoverBox ] = useState<HoverBox>();
-    const [ mentorData, setHoverData] =useState<MentorData>({src : src});
+    const [ imgGap ] = useState<string>('.25rem');
     const itemSpan : number = useBreakpointValue({base:2,sm:3, md:4, lg:5, xl:6, '2xl':6 }) as number;
 
-    const getRelativePosition = (index : number) =>{
-        if(index%itemSpan === 0){ return 'left';}
-        if((index+1)%(itemSpan) === 0){ return 'right'}
-        return 'center';
-    }
-
-    const onMouseEnter = (val: any) => {
-        const rect = val.target.getBoundingClientRect();
-        const canBeSeenFull : boolean = (rect.right < window.innerWidth) && (rect.left > 0);
-        console.log('Mouse entered, will call callback in 2seconds');
-        //console.log('innerWidth:', window.innerWidth);
-        //console.log(val.target.getBoundingClientRect());
-        const hoverBox : HoverBox = {
-            x : rect.left,
-            y : rect.top + window.scrollY,
-            width : rect.width,
-            height : rect.height,
-            isOpen : canBeSeenFull,
-            position: getRelativePosition(index),
-            mentorData : mentorData
+    const getTransformOriginClass = () : string => {
+        const hoverPosition : string = (index % itemSpan) === 0 ? 'left' : ((index+1) % itemSpan === 0 ? 'right' : 'center'); 
+        switch(hoverPosition){
+           case 'left' : return styles['tol'];
+           case 'center' : return styles['toc'];
+           case 'right' : return styles['tor'];
+           default : return '';
         }
-        callback(hoverBox);
-        /*
-        setTimeout(() => {
-            callback(hoverBox);
-            console.log('Callback is getting called.');
-        },250)
-        */
-        //setIsHover(true);
-    }
-    const onMouseLeave = (val: any) => { 
-        console.log('Mouse left.');
-        //console.log(val.target.getBoundingClientRect());
-        const rect = val.target.getBoundingClientRect();
-        const hoverBox : HoverBox = {
-            x : rect.left,
-            y : rect.top + window.scrollY,
-            width : rect.width,
-            height : rect.height,
-            isOpen : false,
-            position: getRelativePosition(index),
-            mentorData : mentorData
-        }
-        //callback(hoverBox);
-        //setIsHover(true);
-        //callback(hoverBox);
     }
 
     return (
         <div
             key={key}
-            className={`${styles['container']} ${getRelativePosition(index)} ${isHover ? styles['hover'] : ' '}` } 
+            className={`${styles['container']}`} 
             style={{flex: `0 0 calc(100% / ${itemSpan})`, 
             maxWidth: `calc(100% / ${itemSpan})`, 
             padding: imgGap}} 
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onClick={() => onClick('Any thing')}
         >
             <img 
                 style={{width:'100%'}}
                 src={src}
+                className={`${styles['image']} ${getTransformOriginClass()}`}
             />
         </div>
     );

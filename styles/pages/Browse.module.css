@@ -51,113 +51,22 @@
     width: 100%;
 }
 
+.sliders-first-item {
+    background-color: transparent;
+}
+
 .sliders {
+    flex-direction: column;
     position: absolute;
     top: 75%;
     z-index: 5;
 }
-.hover-box{
-    opacity: 0;
-    background-color: #080E09;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    border-radius: 5px;
-    z-index: 15;
-    border: 1px solid #DBFF00;
 
-    transform: scale(1);
-    transition: transform 0.3s, visibility 0.3s, opacity 0.3s;
+.sliders-first {
+    background-color: transparent;
 }
 
-.tol {
-    transform-origin: left;
-}
+.sliders-rest{
+    background-color: #101511;
 
-.toc {
-    transform-origin: center;
-}
-
-.tor {
-    transform-origin: right;
-}
-
-.hover-box:hover{
-    opacity: 1;
-    transform: scale(1.5);
-}
-
-.hover-box-img-container{
-    width: 100%;
-}
-
-.hover-box-img{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.hover-box-content-container{
-    display: flex;
-    padding:10px;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    color:white;
-}
-
-.hover-box-header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    color:white;
-}
-
-.hover-box-header-left{
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-}
-
-.hover-box-header-right{
-    margin-left: auto;
-}
-
-.hover-box-add-to-list-button{
-    border-radius: 50%;
-    padding: 5px;
-}
-
-.hover-box-action {
-    margin-left: auto;
-}
-
-
-.hover-box-name{
-    display: flex;
-    color:white;
-    width: 100%;
-}
-
-.hover-box-rating {
-    font-size: 1.5rem;
-    color:#DBFF00;
-    right: auto;
-}
-
-
-.hover-box-titles{
-    color:gray;
-    font-size: 0.75em;
-    font-style: italic;
-}
-
-.hover-box-content{
-    margin-top: 10px;
-    display:flex
-}
-
-.hover-box-tags{
-    width: 75%;
-    font-size: 0.75em;
 }

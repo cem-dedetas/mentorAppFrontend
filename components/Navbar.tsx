@@ -134,7 +134,7 @@ const Navbar = () => {
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
 
                <ModalOverlay />
-               <ModalContent bg="#111015" border='1px' borderColor='#DBFF00' borderTopRadius="md">
+               <ModalContent bg="#111015" border='1px' borderColor='#DBFF00' borderTopRadius="5px">
                   <ModalHeader textColor="whiteAlpha.900" >{isLogin ? t("Login") : t("SignUp")}</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>

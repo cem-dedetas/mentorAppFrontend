@@ -1,12 +1,11 @@
-import Image from 'next/image';
-
-import styles from '../styles/components/Fader.module.css';
-
 interface FaderProps {
-    fadeTo : string;
+    key : string;
+    color : string;
+    direction : 'top' | 'left' | 'bottom' | 'right';
+    className? : string;
 }
 
-const Fader = ({ children, fadeTo } : React.PropsWithChildren<FaderProps>) => {
+const Fader = ({ key, children, color, direction, className } : React.PropsWithChildren<FaderProps>) => {
 
     const hexToCssHsl = (hex : string, valuesOnly = false) => {
         let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -22,7 +21,7 @@ const Fader = ({ children, fadeTo } : React.PropsWithChildren<FaderProps>) => {
         let l = (max + min) / 2;
         if(!h || !s || !l) return;
         if (max == min) {
-          h = s = 0; // achromatic
+          h = s = 0;
         } else {
           var d = max - min;
           s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -43,17 +42,19 @@ const Fader = ({ children, fadeTo } : React.PropsWithChildren<FaderProps>) => {
     }
 
     const getFaderString = () => {
-        const hslString = hexToCssHsl(fadeTo);
-        const hsl = `linear-gradient(180deg,hsla(${hslString},0) 0,hsla(${hslString},.15) 15%,hsla(${hslString},.35) 29%,hsla(${hslString},.58) 44%,${fadeTo} 68%,${fadeTo})`;
+        const hslString = hexToCssHsl(color);
+        const hsl = `linear-gradient(to ${direction},hsla(${hslString},0) 0,hsla(${hslString},.15) 15%,hsla(${hslString},.35) 29%,hsla(${hslString},.58) 44%,${color} 68%,${color})`;
         return hsl;
     }
 
     return (
         <div 
+            key = {key}
             style={{
                 backgroundColor:'transparent !important', 
                 backgroundImage: getFaderString(),
             }}
+            className={className}
         >
             {children}
         </div>

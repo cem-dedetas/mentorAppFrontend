@@ -65,4 +65,20 @@ const PlusIcon = ({color, size} : IconProps) => {
     ); 
 }
 
-export { LeftArrowIcon, RightArrowIcon, ProfileIcon, MenuDownIcon, LogoutIcon, HelpIcon, PlusIcon };
+const StarIcon = ({color, size} : IconProps) => {
+    return (
+        <BaseIcon color={color} size={size}>
+            <path fill={color} d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+        </BaseIcon>
+    ); 
+}
+
+const HalfStarIcon = ({color, size} : IconProps) => {
+    return (
+        <BaseIcon color={color} size={size}>
+            <path fill={color} d="M12 2L9.19 8.62L2 9.24L7.45 13.97L5.82 21L12 17.27V2Z" />
+        </BaseIcon>
+    ); 
+}
+
+export { LeftArrowIcon, RightArrowIcon, ProfileIcon, MenuDownIcon, LogoutIcon, HelpIcon, PlusIcon, StarIcon, HalfStarIcon };

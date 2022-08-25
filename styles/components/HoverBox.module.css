@@ -1,0 +1,15 @@
+.bg-img {
+    display: flex;
+    flex-direction: column;
+    height: auth;
+    aspect-ratio: 16/9;
+    position: absolute;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 5;
+    top: 10%;
+    width: 75%;
+}  

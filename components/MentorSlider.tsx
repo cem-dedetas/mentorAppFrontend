@@ -1,6 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
-import { Flex, useBreakpointValue, AspectRatio, Progress, calc } from '@chakra-ui/react';
-import MentorSliderItem from "../types/MentorSliderItem";
+import { useEffect, useState } from "react";
+import { useBreakpointValue } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 import styles from '../styles/components/MentorSlider.module.css';
@@ -10,18 +9,19 @@ interface MentorSliderProps {
     title? : string;
     source : JSX.Element[];
     bgColor? : string;
+    className? : string;
 }
 
-const MentorSlider = ({key, title, source, bgColor} : MentorSliderProps) => {
+const MentorSlider = ({key, title, source, bgColor, className} : MentorSliderProps) => {
 
-    const [ sliderPadding, setSliderPadding ] = useState('5rem');
-    const [ handleSize, setHandleSize ] = useState('calc(5% - .5rem)');
-    const [ imgGap, setImgGap ] = useState('.25rem');
-    const [ sliderIndex, setSliderIndex ] = useState(0);
-    const [ totalItemCount, setTotalItemCount ] = useState<number>(source.length);
+    const [ handleSize ] = useState<string>('calc(5% - .5rem)');
+    const [ imgGap ] = useState<string>('.25rem');
+    const [ sliderIndex, setSliderIndex ] = useState<number>(0);
+    const [ totalItemCount ] = useState<number>(source.length);
     const [ hover, setHover ] = useState<boolean>(false);
-    const itemSpan : number = useBreakpointValue({base:2, sm:3, md:4, lg:5, xl:6, '2xl':6 }) as number;
     const [ progressBarItemCount, setProgressBarItemCount ] = useState<number>(1);
+    const itemSpan : number = useBreakpointValue({base:2, sm:3, md:4, lg:5, xl:6, '2xl':6 }) as number;
+
     useEffect(() => {
         if(!itemSpan){
             return;
@@ -85,10 +85,10 @@ const MentorSlider = ({key, title, source, bgColor} : MentorSliderProps) => {
             </div>
         </div>
         <div 
-            className={styles['container']}
+            className={`${styles['container']} styles[${className}]`}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            style={{backgroundColor: !bgColor ? 'transparent' : bgColor}}    
+            style={{backgroundColor: !bgColor ? 'transparent' : bgColor, paddingBottom:'30px',}}    
         >   
             <div 
                 className={`${styles['handle']} ${styles['leftHandle']}`}

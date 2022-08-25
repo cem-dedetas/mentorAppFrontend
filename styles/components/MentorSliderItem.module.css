@@ -1,9 +1,29 @@
 .container {
     aspect-ratio: 16 / 9;
-    border-radius: 25px;
-}
-
-.container > img{
     border-radius: 5px;
 }
 
+.image{
+    aspect-ratio: 16 / 9;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.image:hover{
+    z-index: 25;
+    transform: scale(1.2);
+    border: 1px solid #DBFF00;
+    cursor: pointer;
+}
+
+.tol{
+    transform-origin: top left;
+}
+
+.toc{
+    transform-origin: top center;
+}
+
+.tor{
+    transform-origin: top right;
+}

@@ -4,11 +4,12 @@ import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Button from '../../components/Button';
+import HoverBox, { HoverBoxProps } from '../../components/HoverBox';
 import styles from '../../styles/pages/Browse.module.css';
 import bgImage from '../../public/img3.jpg';
 
 import MentorSlider from '../../components/MentorSlider';
-import MentorSliderItem, { HoverBox } from '../../components/MentorSliderItem';
+import MentorSliderItem from '../../components/MentorSliderItem';
 import Navbar from '../../components/Navbar';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import Fader from '../../components/Fader';
@@ -27,17 +28,7 @@ const Browse : NextPage = () => {
    const [ categories, setCategories ] = useState<string[]>();
    const [ categoryData, setCategoryData ] = useState<CategoryData[]>();
    const [ hover, setHover ] = useState(false);
-   const [ hoverBox, setHoverBox ] = useState<HoverBox>();
-
-   /*
-   useEffect(() => {
-      if(hoverBox?.isOpen){
-         setHover(true);
-         return;
-      }
-      setHover(false);
-   }, [hoverBox, hover])
-   */
+   const [ isSliderItemClicked, setIsSliderItemClicked ] = useState<boolean>(false);
 
    const getCategories = async () => {
       //Fetch showable categories here.
@@ -83,25 +74,29 @@ const Browse : NextPage = () => {
             sliderItems.push(
                <MentorSliderItem 
                   key={sliderItemId.toString()}
-                  callback={(val:any) => 
-                     {
-                        
-                        console.log('Callback is seen by the browse page.');
-                        setHoverBox(val);
-                     }
-                  }
                   src={src}
                   index={sliderItemId}
+                  onClick={
+                     (val : any) => {
+                        console.log(val);
+                        setIsSliderItemClicked(true);
+                     }
+                  }
                />
             );
          })
          if(categoryId == 0){
             sliders.push(
-               <Fader fadeTo='#101511'>
+               <Fader 
+                  key={`faded${categoryId.toString()}`} 
+                  direction='bottom'
+                  color='#101511'
+               >
                   <MentorSlider
                      key={categoryId.toString()}
                      title="Powerlifting Mentors"
                      source={sliderItems}
+                     className={styles['sliders-first-item']}
                   />
                </Fader>
             );
@@ -116,105 +111,19 @@ const Browse : NextPage = () => {
             );
          }
       })
+
+      
+
       return sliders;
    }
 
-   const getHoverBox = () => {
-      console.log('Hoverbox getter function will be called again.');
-
-      if(!hoverBox){
-         console.log('Hoverbox is empty, yeet!.')
-         return;
-      };
-
-      var transformOrigin = styles['tol'];
-      switch(hoverBox?.position){
-         case 'left' : transformOrigin = styles['tol'];
-         break;
-         case 'center' : transformOrigin = styles['toc'];
-         break;
-         case 'right' : transformOrigin = styles['tor'];
-         break;
-      }
-
-
-      console.log('now we are talking.');
-      console.log('Hoverbox updated.',hoverBox);
-      return (
-         <div
-            onMouseEnter={() => {
-            }}
-            onMouseLeave={() => {
-               setHoverBox({
-                  ...hoverBox,
-                  isOpen:false
-               })
-            }}
-            style={{
-               visibility:hoverBox.isOpen? 'visible' : 'hidden',
-               width:hoverBox.width, 
-               left:`${hoverBox.x}px`, 
-               top:`${hoverBox.y}px`,
-            }}
-            className={`${styles['hover-box']} ${transformOrigin}`}
-         >
-            <div
-               className={styles['hover-box-img-container']}
-            >
-               <Image 
-                  src={hoverBox.mentorData.src} 
-                  alt="me" 
-                  width={hoverBox.height*2}
-                  height={`${hoverBox.height*2/(16/9)}%`}
-                  className={styles['hover-box-img']}
-               />
-            </div>
-            <div
-               className={styles['hover-box-content-container']}
-            >
-               <div className={styles['hover-box-header']}>
-                  <div className={styles['hover-box-header-left']}>
-                     <span className={styles['hover-box-name']}>
-                        Doruk Sikişenses
-                     </span>
-                     <span className={styles['hover-box-titles']}>
-                        Powerlifter / Dietetian
-                     </span>
-                  </div>
-                  <div className={styles['hover-box-header-right']}>
-                     <span className={styles['hover-box-rating']}>
-                        4.7/5
-                     </span>
-                  </div>
-               </div>
-               <div
-                  className={styles['hover-box-content']}
-               >
-                  <div className={styles['hover-box-tags']}>
-                     Responds Fast - Good Teacher - Educated
-                  </div>
-                  <div
-                     className={styles['hover-box-action']}
-                  >                  
-                     <Button
-                        type = "secondary"
-                        label = ""
-                        icon={<PlusIcon color='#DBFF00' size='12'/>}
-                        onClick = {() => {console.log('clicked')}}
-                        style={{padding:'8px', borderRadius:'50%'}}
-                     />
-                  </div>
-               </div>
-
-            </div>
-         </div>
-      );
-   }
-   
    return (
-      <div>
+      <>  
          <Navbar/>
-         {getHoverBox()}
+         <HoverBox
+            isOpen = {isSliderItemClicked}
+            onClose = {() => {setIsSliderItemClicked(false);}}
+         />
          <div className={styles['container']}>
             <div 
                className={styles['content']} 
@@ -247,7 +156,7 @@ const Browse : NextPage = () => {
                {getSliders()}
             </div>
          </div>
-      </div>
+      </>
    )
 }
 
