@@ -11,7 +11,6 @@
    align-items: center;
    transition: color 0.25s ease;
    transition: background-color 0.25s ease;
-   background-image: linear-gradient(to top, transparent 0%, rgba(8, 14, 9, 0.85) 100%);
 
 }
 

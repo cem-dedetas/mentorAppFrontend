@@ -33,3 +33,10 @@ a {
   --soft-black : #101511;
   --green : #DBFF00;
 }
+
+.palette-two {
+  --dark-black : #040404;
+  --soft-black : #1c1c1c;
+  --dark-yellow : #f4d40c;
+  --soft-yellow : #f4e41c;
+}

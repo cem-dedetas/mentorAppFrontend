@@ -14,28 +14,11 @@ const Navbar = () => {
    const { t } = useTranslation();
 
    const mobile = useBreakpointValue({ base: true, md: false });
-   const [top, setTop] = useState(false);
    const [loggedIn, setLogin] = useState(false);
    const { isOpen, onOpen, onClose } = useDisclosure();
    const [emailInput, setEmailInput] = useState('');
    const [passwordInput, setPWInput] = useState('');
    const router = useRouter();
-
-   useEffect(() => {
-      // Define a function that is called when the scroll event fires
-      const handleScroll = (e: any) => {
-         const scrollTop = e.target.documentElement.scrollTop;
-         scrollTop != 0 ? setTop(true) : setTop(true);
-      };
-      if (document) {
-         document.addEventListener("scroll", handleScroll);
-      }
-      return () => {
-         if (document) {
-            document.removeEventListener("scroll", handleScroll);
-         }
-      };
-   }, [top]);
 
    const getMoreDropdownItems = () => {
       const moreDropdownItems = [
@@ -217,7 +200,7 @@ const Navbar = () => {
       console.log(response);
       if(response){
          setLogin(true);
-         router.push('/browse');
+         //router.push('/browse');
       }
    }
     
@@ -229,7 +212,7 @@ const Navbar = () => {
    }
    
    return (
-      <><div className={`${styles['container']} ${top && styles['top']}`}>
+      <><div className={`bg-grey ${styles['container']}`}>
          <div className={styles['content']}>
             <div className={styles['left']}>
                <div className={styles['logo']}>
