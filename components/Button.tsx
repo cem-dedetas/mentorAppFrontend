@@ -17,8 +17,8 @@ const Button = ({type, label, onClick, icon, className, style} : ButtonProps) =>
          as='button' 
          p={4} 
          paddingY = {'5px'} 
-         borderRadius={5}
          border='1px'
+         borderRadius="5px"
          borderColor={type === 'secondary' ? '#DBFF00' : '#DBFF00'}
          fontWeight={500}
          onClick={onClick}

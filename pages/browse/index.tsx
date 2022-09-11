@@ -1,20 +1,16 @@
 import type { NextPage } from 'next'
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Button from '../../components/Button';
-import HoverBox, { HoverBoxProps } from '../../components/HoverBox';
+import HoverBox from '../../components/HoverBox';
 import styles from '../../styles/pages/Browse.module.css';
-import bgImage from '../../public/img3.jpg';
-
 import MentorSlider from '../../components/MentorSlider';
 import MentorSliderItem from '../../components/MentorSliderItem';
-import Navbar from '../../components/Navbar';
-import { createRef, useCallback, useEffect, useRef, useState } from 'react';
+import Navbar from '../../components/Navbar/Navbar';
 import Fader from '../../components/Fader';
 import useIsSsr from '../../hooks/useIsSsr';
-import { PlusIcon } from '../../components/Icon';
 import { DUMMY_CATEGORIES, DUMMY_CATEGORY_DATA } from '../../services/dummy-data';
 
 interface CategoryData {
@@ -24,10 +20,8 @@ interface CategoryData {
 
 const Browse : NextPage = () => {
 
-   const { t } = useTranslation();
    const [ categories, setCategories ] = useState<string[]>();
    const [ categoryData, setCategoryData ] = useState<CategoryData[]>();
-   const [ hover, setHover ] = useState(false);
    const [ isSliderItemClicked, setIsSliderItemClicked ] = useState<boolean>(false);
 
    const getCategories = async () => {

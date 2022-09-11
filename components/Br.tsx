@@ -7,7 +7,7 @@ const Br = ({ key, color } : BrProps) => {
     return (
         <div
             key={key} 
-            style={{borderBottom : `1px solid ${color}`, height : '0px'}} 
+            className={`border border-${color} h-0`}
         />
     );
 }
